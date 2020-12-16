@@ -1,0 +1,82 @@
+body {
+    background-color: #a2bde8;
+}
+
+.mainBackground{
+    background-color: #3f64a1;
+    margin-top: 2%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 50px;
+    border-radius: 10%;
+    
+    
+}
+main p {
+    text-align: center;
+    color: white;
+}
+main h1 {
+    text-align: center;
+    color: white;
+}
+/* styling for quiz page */
+.quizSection{
+    display: none;
+}
+
+.quizSection h1{
+    text-align: center;
+    color: white;
+}
+
+.quizSection h3{
+    background-color: white;
+    padding: 5px;
+    
+}
+
+.quizSection p{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10%;
+    
+}
+
+.correctSection {
+    display:none;
+    text-align: center;
+    color:white;
+    font-size: 25px;
+    background-color: darkgreen;
+    margin-top: 2%;
+    margin-left: 45%;
+    margin-right: 45%;
+    padding: 15px;
+    border-radius: 100%;
+
+}
+.incorrectSection {
+    display:none;
+    text-align: center;
+    color:white;
+    font-size: 25px;
+    background-color: darkred;
+    margin-top: 2%;
+    margin-left: 43%;
+    margin-right: 43%;
+    padding: 15px;
+    border-radius: 100%;
+
+}
+
+.endSection {
+    display:none;
+    text-align: center;
+    color: white;
+}
+
+
+#startButton {
+    text-align: center
+}
