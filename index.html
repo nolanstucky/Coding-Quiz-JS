@@ -26,6 +26,9 @@
     </main>
     <!-- container for the html that will be changed for the question and answer portion of the quiz -->
     <div class="quizSection mainBackground">
+        <div class="timer">
+            <h1 id="timer"> </h1>
+        </div>
         <h1 id = "quiz-question">Question.</h1>
         <div class ="row">
             <div class = "col-2">
@@ -78,10 +81,28 @@
                 <p>Enter your name here:</p>
             </div>
             <div class="col-4">
-                <input class="form-control" type="text" placeholder="">
+                <input class="form-control" type="text" id="user-initials" placeholder="">
             </div>
             <div class="col-4">
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                <button type="submit" class="btn btn-primary btn btn-block score-button">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="scoreSection mainBackground">
+        <h1>Quiz complete!</h1>
+        <div class="row">
+            <div class="col-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+
             </div>
         </div>
     </div>
@@ -92,6 +113,7 @@
     <div class="incorrectSection">
         <p>Incorrect!</p>
     </div>
+    
     <script src="assets/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>

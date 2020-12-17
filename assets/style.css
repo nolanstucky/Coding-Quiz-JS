@@ -1,9 +1,9 @@
 body {
-    background-color: #a2bde8;
+    background-color: white;
 }
-
+/* #3f64a #a2bde8*/
 .mainBackground{
-    background-color: #3f64a1;
+    background-color: black;
     margin-top: 2%;
     margin-left: 30%;
     margin-right: 30%;
@@ -25,9 +25,15 @@ main h1 {
     display: none;
 }
 
+#timer{
+    font-size: 20px;
+}
+
 .quizSection h1{
     text-align: center;
     color: white;
+    margin-bottom: 30px;
+    padding: -10px;
 }
 
 .quizSection h3{
@@ -76,6 +82,11 @@ main h1 {
     color: white;
 }
 
+.scoreSection {
+    display: none;
+    text-align: center;
+    color: white;
+}
 
 #startButton {
     text-align: center

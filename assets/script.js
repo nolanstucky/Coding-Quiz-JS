@@ -12,9 +12,14 @@ var scoreButton = document.querySelector(".score-button")
 var correctBox = document.querySelector(".correctSection")
 var incorrectBox = document.querySelector(".incorrectSection")
 var endPage = document.querySelector(".endSection")
+var scorePage = document.querySelector(".scoreSection")
 var finalScore = document.querySelector("#score")
+var timerBox = document.querySelector("#timer")
+var userInitials = document.querySelector("#user-initials")
 var correctScore = 0;
 var currentQuestion = 0;
+const startingTime = 90;
+var timeLeft 
 
 const questions = [
     {
@@ -123,33 +128,50 @@ answerButton.forEach(item => {
             correctScore++;
         } else if (currentQuestion <= questions.length -1){
             showIncorrect();
+            timeLeft -= 10;
+            return timeLeft;
         }
     })
   })
+
+scoreButton.addEventListener("click",function(event){
+    event.preventDefault();
+    
+    if (userInitials === ""){
+        console.log("test");
+    } else {
+        loadScorePage();
+    }
+    
+
+})
 
 function startQuiz(){
     mainPage.style.display = "none";
     quizPage.style.display = "block";
     loadQuestion();
     loadAnswers();
+    startTimer();
 }
 
 function startTimer() {
-    var timeLeft = 5;
+    timeLeft = startingTime;
   
     var timeInterval = setInterval(function() {
-      timerEl.textContent = timeLeft + " seconds remaining";
+      timerBox.textContent = Math.floor(timeLeft/60)+":"+ formatTime(timeLeft%60);
       timeLeft--;
   
       if (timeLeft === 0) {
-        timerEl.textContent = "";
-        speedRead();
+        timerBox.textContent = "";
         clearInterval(timeInterval);
       }
   
     }, 1000);
   }
-  
+
+function formatTime(timeLeft) {
+    return (timeLeft < 10 ? "0" + timeLeft : "" + timeLeft);
+}
 
 
 function loadQuestion(){
@@ -207,5 +229,12 @@ function loadEnd() {
     quizPage.style.display = "none";
     endPage.style.display = "block";
 }
+
+function loadScorePage(){
+    endPage.style.display = "none";
+    scorePage.style.display = "block";
+}
+
+
 
   
