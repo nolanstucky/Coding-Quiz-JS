@@ -1,26 +1,37 @@
 //global variables that will be used to change the html of the page.
-var question = document.querySelector("#quiz-question")
-var answer1 = document.querySelector("#answer-1")
-var answer2 = document.querySelector("#answer-2")
-var answer3 = document.querySelector("#answer-3")
-var answer4 = document.querySelector("#answer-4")
-var startButton = document.querySelector(".start-button")
-var mainPage = document.querySelector(".startingSection")
-var quizPage = document.querySelector(".quizSection")
-var answerButton = document.querySelectorAll(".answer-button")
-var scoreButton = document.querySelector(".score-button")
-var correctBox = document.querySelector(".correctSection")
-var incorrectBox = document.querySelector(".incorrectSection")
-var endPage = document.querySelector(".endSection")
-var scorePage = document.querySelector(".scoreSection")
-var finalScore = document.querySelector("#score")
-var timerBox = document.querySelector("#timer")
-var userInitials = document.querySelector("#user-initials")
+var question = document.querySelector("#quiz-question");
+var answer1 = document.querySelector("#answer-1");
+var answer2 = document.querySelector("#answer-2");
+var answer3 = document.querySelector("#answer-3");
+var answer4 = document.querySelector("#answer-4");
+var startButton = document.querySelector(".start-button");
+var mainPage = document.querySelector(".startingSection");
+var quizPage = document.querySelector(".quizSection");
+var answerButton = document.querySelectorAll(".answer-button");
+var scoreButton = document.querySelector(".score-button");
+var correctBox = document.querySelector(".correctSection");
+var incorrectBox = document.querySelector(".incorrectSection");
+var endPage = document.querySelector(".endSection");
+var scorePage = document.querySelector(".scoreSection");
+var finalScore = document.querySelector("#score");
+var timerBox = document.querySelector("#timer");
+var userInitials = document.querySelector("#user-initials");
+var nameList = document.querySelector("#name-place");
+var scoreList = document.querySelector("#score-place");
+var timeList = document.querySelector("#time-place");
+var clearButton = document.querySelector(".clear-button");
+var scoreArea = document.querySelector(".score-area");
+var scorePageButton = document.querySelector("#score-page-button");
+var homePageButton = document.querySelector("#home-page-button");
+//variables 
+var names = [];
+var scores = [];
+var times = [];
 var correctScore = 0;
 var currentQuestion = 0;
 const startingTime = 90;
-var timeLeft 
-
+var timeLeft;
+//object 
 const questions = [
     {
         question: 'What is the only enemy of an orca whale?',
@@ -102,14 +113,14 @@ const questions = [
         },
         correctAnswer: 'b'
     },
-]
+];
 
 
 
 startButton.addEventListener("click",function(){
     startQuiz();
 
-})
+});
 
 answerButton.forEach(item => {
     item.addEventListener('click', event => {
@@ -118,8 +129,6 @@ answerButton.forEach(item => {
         loadQuestion();
         loadAnswers();
         var buttonValue = event.target.value;
-        console.log(event.target.value);
-        console.log(questions[currentQuestion].correctAnswer)
         if(currentQuestion >= 7){
             loadEnd();
         }
@@ -132,7 +141,7 @@ answerButton.forEach(item => {
             return timeLeft;
         }
     })
-  })
+  });
 
 scoreButton.addEventListener("click",function(event){
     event.preventDefault();
@@ -140,15 +149,36 @@ scoreButton.addEventListener("click",function(event){
     if (userInitials === ""){
         console.log("test");
     } else {
+        pushScores();
         loadScorePage();
+        renderScores();
     }
-    
+});
 
-})
+clearButton.addEventListener("click",function(event){
+    event.preventDefault();
+    localStorage.clear();
+    scoreArea.innerHTML = "";
+});
+
+scorePageButton.addEventListener("click",function(event){
+    event.preventDefault();
+    mainPage.style.display = "none";
+    scorePage.style.display = "block";
+    
+});
+
+homePageButton.addEventListener("click",function(event){
+    event.preventDefault();
+    mainPage.style.display = "block";
+    scorePage.style.display = "none";
+});
+
 
 function startQuiz(){
     mainPage.style.display = "none";
     quizPage.style.display = "block";
+    getScores();
     loadQuestion();
     loadAnswers();
     startTimer();
@@ -163,6 +193,7 @@ function startTimer() {
   
       if (timeLeft === 0) {
         timerBox.textContent = "";
+        loadEnd();
         clearInterval(timeInterval);
       }
   
@@ -233,7 +264,60 @@ function loadEnd() {
 function loadScorePage(){
     endPage.style.display = "none";
     scorePage.style.display = "block";
+
 }
+
+function storeScores() {
+    localStorage.setItem('names', JSON.stringify(names));
+    localStorage.setItem('scores', JSON.stringify(scores));
+    localStorage.setItem('times', JSON.stringify(times));
+}
+
+function getScores() {
+    var storedNames = JSON.parse(localStorage.getItem("names"));
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedTimes = JSON.parse(localStorage.getItem("times"));
+
+    if (storedNames !== null){
+        names = storedNames;
+        scores = storedScores;
+        times = storedTimes;
+    }
+
+}
+
+function renderScores() {
+    nameList.innerHTML = "";
+    scoreList.innerHTML = "";
+    timeList.innerHTML = "";
+
+    for (var i = 0; i < names.length; i++){
+        var name = names[i];
+        var score = scores[i];
+        var time = times[i];
+
+        var h5 = document.createElement("h5");
+        h5.textContent = name;
+        nameList.appendChild(h5);
+
+        var h5 = document.createElement("h5");
+        h5.textContent = score;
+        scoreList.appendChild(h5);
+
+        var h5 = document.createElement("h5");
+        h5.textContent = time;
+        timeList.appendChild(h5);
+    }
+}
+
+function pushScores() {
+    names.push(userInitials.value);
+    scores.push(correctScore);
+    times.push(timeLeft);
+    storeScores();
+    getScores();
+}
+
 
 
 

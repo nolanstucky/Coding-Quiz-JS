@@ -11,16 +11,22 @@
 </head>
 <body>
     <main class="mainBackground startingSection">
-        <h1 id = "quiz-title">Coding Quiz</h1>
+        <h1 id = "quiz-title">Orca Quiz</h1>
             <div class="row">
                 <div class="col-12">
-                    <p id = quiz-discription>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia tempore reiciendis magnam, mole</p>
+                    <p id = quiz-discription>This is a very fun quiz about Orcas!</p>
                 </div>
             </div>
 
             <div class ="row" id ="startButton">
                 <div class = "col-12">
-                    <button type="button" class="btn btn-primary btn-lg btn-block start-button">Block level button</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block start-button">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="row" id ="score-page-button">
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Score Page</button>
                 </div>
             </div>
     </main>
@@ -90,19 +96,38 @@
     </div>
 
     <div class="scoreSection mainBackground">
-        <h1>Quiz complete!</h1>
+        <h1>Scores!</h1>
         <div class="row">
-            <div class="col-12">
+            <div class="col-4">
+                <h3>Name:</h3>
+            </div>
+            <div class ="col-4">
+                <h3>Score:</h3>
+            </div>
+            <div class="col-4">
+                <h3>Time:</h3>
+            </div>
+        </div>
+        <div class="row score-area">
+            <div class="col-4" id="name-place">
+                
+            </div>
+            <div class="col-4" id="score-place">
+                
+            </div>
+            <div class="col-4" id="time-place">
+                
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class = "col-12">
+                <button type="button" class="btn btn-primary btn-lg btn-block clear-button">Clear Scores</button>
             </div>
-            <div class="col-4">
+        </div>
 
-            </div>
-            <div class="col-4">
-
+        <div class="row" id ="home-page-button">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary btn-lg btn-block start-button">Main Page</button>
             </div>
         </div>
     </div>

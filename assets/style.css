@@ -89,5 +89,15 @@ main h1 {
 }
 
 #startButton {
-    text-align: center
+    text-align: center;
+}
+
+#score-page-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#home-page-button {
+    margin-top: 20px;
+    text-align: center;
 }
