@@ -21,14 +21,15 @@ var scoreList = document.querySelector("#score-place");
 var timeList = document.querySelector("#time-place");
 var clearButton = document.querySelector(".clear-button");
 var scoreArea = document.querySelector(".score-area");
-var scorePageButton = document.querySelector("#score-page-button");
-var homePageButton = document.querySelector("#home-page-button");
+var scorePageButton = document.querySelector(".score-page-button");
+var homePageButton = document.querySelector(".home-page-button");
 //variables 
+var timeInterval;
 var names = [];
 var scores = [];
 var times = [];
-var correctScore = 0;
-var currentQuestion = 0;
+var correctScore;
+var currentQuestion;
 const startingTime = 90;
 var timeLeft;
 //object 
@@ -178,6 +179,8 @@ homePageButton.addEventListener("click",function(event){
 function startQuiz(){
     mainPage.style.display = "none";
     quizPage.style.display = "block";
+    currentQuestion = 0;
+    correctScore = 0;
     getScores();
     loadQuestion();
     loadAnswers();
@@ -187,7 +190,7 @@ function startQuiz(){
 function startTimer() {
     timeLeft = startingTime;
   
-    var timeInterval = setInterval(function() {
+    timeInterval = setInterval(function() {
       timerBox.textContent = Math.floor(timeLeft/60)+":"+ formatTime(timeLeft%60);
       timeLeft--;
   
@@ -196,7 +199,7 @@ function startTimer() {
         loadEnd();
         clearInterval(timeInterval);
       }
-  
+      
     }, 1000);
   }
 
@@ -259,6 +262,7 @@ function showIncorrect() {
 function loadEnd() {
     quizPage.style.display = "none";
     endPage.style.display = "block";
+    clearInterval(timeInterval);
 }
 
 function loadScorePage(){
