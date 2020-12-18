@@ -23,16 +23,23 @@ var clearButton = document.querySelector(".clear-button");
 var scoreArea = document.querySelector(".score-area");
 var scorePageButton = document.querySelector(".score-page-button");
 var homePageButton = document.querySelector(".home-page-button");
-//variables 
+//variable for tracking the time
 var timeInterval;
+//array that will be filled with user names
 var names = [];
+//array that will be filled with user scores
 var scores = [];
+//array that will be filled with user times
 var times = [];
+//tracking variable for the correct score
 var correctScore;
+//tracking variable for the questions
 var currentQuestion;
+//starting time variable
 const startingTime = 90;
+//time variable that counts down
 var timeLeft;
-//object 
+//object that holds all of the questions and answers with the correct answer
 const questions = [
     {
         question: 'What is the only enemy of an orca whale?',
@@ -117,25 +124,29 @@ const questions = [
 ];
 
 
-
+//when start button is pressed it starts the quiz.
 startButton.addEventListener("click",function(){
     startQuiz();
 
 });
-
+//event listener that listens for the 4 buttons that have the answers attached to them. 
 answerButton.forEach(item => {
     item.addEventListener('click', event => {
         event.preventDefault();
+        //as the current question goes up the load question and load answers will load each question and answer
         currentQuestion++;
         loadQuestion();
         loadAnswers();
         var buttonValue = event.target.value;
+        //when all of the questions are used it will call upon the loadend function to transition to the end
         if(currentQuestion >= 7){
             loadEnd();
         }
+        //checks to see if it is the correct answer and will add 1 to the correctscore tracking variable
         if(currentQuestion <= questions.length -1 && buttonValue === questions[currentQuestion-1].correctAnswer){
             showCorrect();
             correctScore++;
+        //if it isn't the correct answer the time goes down and it shows the incorrect circle
         } else if (currentQuestion <= questions.length -1){
             showIncorrect();
             timeLeft -= 10;
@@ -143,7 +154,7 @@ answerButton.forEach(item => {
         }
     })
   });
-
+//when the score button is clicked it will add the tracking variables into the local storage array and will then show the scores based off of local storage
 scoreButton.addEventListener("click",function(event){
     event.preventDefault();
     
@@ -155,27 +166,27 @@ scoreButton.addEventListener("click",function(event){
         renderScores();
     }
 });
-
+//when the clear button is clicked it clears the local storage and clears the score div
 clearButton.addEventListener("click",function(event){
     event.preventDefault();
     localStorage.clear();
     scoreArea.innerHTML = "";
 });
-
+//when score page button is pressed it takes the user to the score page
 scorePageButton.addEventListener("click",function(event){
     event.preventDefault();
     mainPage.style.display = "none";
     scorePage.style.display = "block";
     
 });
-
+//when home page button is pressed it takes the user to the home page
 homePageButton.addEventListener("click",function(event){
     event.preventDefault();
     mainPage.style.display = "block";
     scorePage.style.display = "none";
 });
 
-
+//this is the function that starts the quiz
 function startQuiz(){
     mainPage.style.display = "none";
     quizPage.style.display = "block";
@@ -186,7 +197,7 @@ function startQuiz(){
     loadAnswers();
     startTimer();
 }
-
+//this is the timer function that counts down from 1:30
 function startTimer() {
     timeLeft = startingTime;
   
@@ -202,12 +213,12 @@ function startTimer() {
       
     }, 1000);
   }
-
+//function that formats the time to show minutes and seconds
 function formatTime(timeLeft) {
     return (timeLeft < 10 ? "0" + timeLeft : "" + timeLeft);
 }
 
-
+//this function loads the questions based off of the currentQuestion tracking variable
 function loadQuestion(){
     if (currentQuestion <= questions.length -1){
         question.textContent = questions[currentQuestion].question;
@@ -215,7 +226,7 @@ function loadQuestion(){
         return;
     }
 }
-
+//this function loads the answers based off of the currentQuestion tracking variable
 function loadAnswers(){
     if (currentQuestion <= questions.length -1){
         answer1.textContent = questions[currentQuestion].answers.a;
@@ -226,7 +237,7 @@ function loadAnswers(){
         return;
     }
 }
-
+//this shows a small green circle if its the correct answer for half a second
 function showCorrect() {
     var timeLeft = 2;
   
@@ -242,7 +253,7 @@ function showCorrect() {
   
     }, 500);
 }
-
+//this shows a small red circle if its an incorrect answer for half a second
 function showIncorrect() {
     var timeLeft = 2;
   
@@ -258,25 +269,25 @@ function showIncorrect() {
   
     }, 500);
 }
-
+//this function loads the end page
 function loadEnd() {
     quizPage.style.display = "none";
     endPage.style.display = "block";
     clearInterval(timeInterval);
 }
-
+//this function loads the score page
 function loadScorePage(){
     endPage.style.display = "none";
     scorePage.style.display = "block";
 
 }
-
+//this function stores the score arrays
 function storeScores() {
     localStorage.setItem('names', JSON.stringify(names));
     localStorage.setItem('scores', JSON.stringify(scores));
     localStorage.setItem('times', JSON.stringify(times));
 }
-
+//this function retrieves the score arrays and parses them
 function getScores() {
     var storedNames = JSON.parse(localStorage.getItem("names"));
     var storedScores = JSON.parse(localStorage.getItem("scores"));
@@ -289,7 +300,7 @@ function getScores() {
     }
 
 }
-
+//this function prints the score arrays to the score page
 function renderScores() {
     nameList.innerHTML = "";
     scoreList.innerHTML = "";
@@ -313,7 +324,7 @@ function renderScores() {
         timeList.appendChild(h5);
     }
 }
-
+//this function pushes the tracking variables into the score arrays.
 function pushScores() {
     names.push(userInitials.value);
     scores.push(correctScore);
